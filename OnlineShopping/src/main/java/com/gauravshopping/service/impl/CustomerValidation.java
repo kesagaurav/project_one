@@ -38,7 +38,6 @@ public class CustomerValidation {
 			return false;
 		}
 	}
-	//"^(.+)@(.+)$ "
 	
 	public static boolean isValidPassword(String password) {
 		if(password!=null && password.matches("[a-zA-Z]{3,20}[0-9]{1,9}")) {
