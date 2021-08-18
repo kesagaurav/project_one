@@ -15,17 +15,17 @@ import com.gauravshopping.util.MySqlConnection;
 public class CustomerDaoImpl implements CustomerDao {
 	private static Logger log=Logger.getLogger(CustomerDaoImpl.class);
 	@Override
-	public int createCustomer(Customer c) throws BusinessException {
+	public int createCustomer(Customer customer) throws BusinessException {
 		int c1=0;
 		try(Connection con=MySqlConnection.getConnection()){
 			String sql="insert into customer(customer_id,firstname,lastname,email,password,product_id)values(?,?,?,?,?,?)";
 			PreparedStatement ps=con.prepareStatement(sql);
-			ps.setInt(1,c.getCustomer_id());
-			ps.setString(2,c.getFirst_name());
-			ps.setString(3,c.getLast_name());
-			ps.setString(4,c.getEmail());
-			ps.setString(5,c.getPassword());
-			ps.setInt(6, c.getProduct().getProduct_id());
+			ps.setInt(1,customer.getCustomer_id());
+			ps.setString(2,customer.getFirst_name());
+			ps.setString(3,customer.getLast_name());
+			ps.setString(4,customer.getEmail());
+			ps.setString(5,customer.getPassword());
+			ps.setInt(6, customer.getProduct().getProduct_id());
 			c1=ps.executeUpdate();
 			log.info("\n successfully inserted  in the database " + c1);
 		

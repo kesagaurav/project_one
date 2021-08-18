@@ -32,7 +32,7 @@ public class OnlineShoppingMain {
 		ProductDaoService pDaoService = new ProductServiceImpl();
 		ProductDao pDao = new ProductDaoImpl();
 //		CustomerProductService cpService=new CustomerProductServiceImpl();
-		CustomerService customerService=new CustomerServiceImpl();
+		CustomerService customerService = new CustomerServiceImpl();
 
 		do {
 			log.info("1) employee login");
@@ -109,7 +109,6 @@ public class OnlineShoppingMain {
 				break;
 			case 2:
 				log.info("\n hi please add the below details for the customer login");
-				Customer customer1 = new Customer();
 				LoginCustomerService loginCustomerService = new LoginCustomerServiceImpl();
 				try {
 					log.info("please enter username");
@@ -139,7 +138,7 @@ public class OnlineShoppingMain {
 						try {
 							List<Product> productList = pDaoService.getProductByProductName(name);
 							if (productList != null && productList.size() > 0) {
-								log.info("Total there are " + productList.size() + " numper of products name is "
+								log.info("Total there are " + productList.size() + " number of products name is "
 										+ name.toUpperCase() + "pinting products names");
 								for (Product p1 : productList) {
 									log.info(p1);

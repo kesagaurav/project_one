@@ -5,6 +5,6 @@ import com.gauravshopping.model.Customer;
 
 public interface CustomerDao {
 
-		public int createCustomer(Customer c) throws BusinessException;
+		public int createCustomer(Customer customer) throws BusinessException;
 	
 }
