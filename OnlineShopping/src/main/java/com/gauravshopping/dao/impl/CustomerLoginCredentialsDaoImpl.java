@@ -15,7 +15,7 @@ import com.gauravshopping.util.MySqlConnection;
 public class CustomerLoginCredentialsDaoImpl implements CustomerLoginCredentialsDao {
 	private static Logger log=Logger.getLogger(CustomerLoginCredentialsDaoImpl.class);
 	@Override
-	public int addCredentials(String email, String password) throws BusinessException {
+	public String addCredentials(String email, String password) throws BusinessException {
 		//int b=0;
 		try(Connection connection=MySqlConnection.getConnection()){
 			String sql="select email,password from customer where email=? and password=?";
@@ -35,7 +35,9 @@ public class CustomerLoginCredentialsDaoImpl implements CustomerLoginCredentials
 		} catch (ClassNotFoundException | SQLException e) {
 				log.warn(e.getMessage());
 		}
-		return 0;
+		//return 1;
+		//return email + password;
+		return "";
 		
 	}
 

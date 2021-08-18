@@ -16,11 +16,13 @@ public class EmployeeCredentialsDaoImpl implements EmployeeLoginCredentialsDao {
 	private static Logger log=Logger.getLogger(EmployeeCredentialsDaoImpl.class);
 
 	@Override
-	public int addEmployeeCredentials(String username, String password) throws BusinessException {
+	public String addEmployeeCredentials(String username, String password) throws BusinessException {
 		
 		try(Connection connection=MySqlConnection.getConnection()){
 			String sql="select employee_name,employee_password from employee where employee_name=? and employee_password=?";
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
+			preparedStatement.setString(1,username);
+			preparedStatement.setString(2,password);
 			ResultSet resultset=preparedStatement.executeQuery();
 			while(resultset.next()) {
 				Employee employee=new Employee();
@@ -28,11 +30,11 @@ public class EmployeeCredentialsDaoImpl implements EmployeeLoginCredentialsDao {
 				employee.setEmployee_pasword(resultset.getString("employee_password"));
 				
 			}
-			log.info("employee successfully login");
+			log.info(" successfully logged in ");
 		} catch (ClassNotFoundException | SQLException e) {
 			log.info(e.getMessage());
 		}
-		return 0;
+		return "";
 		
 		
 

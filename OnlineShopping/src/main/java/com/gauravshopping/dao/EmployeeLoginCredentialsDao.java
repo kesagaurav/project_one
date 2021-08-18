@@ -4,7 +4,6 @@ import com.gauravshopping.exception.BusinessException;
 
 public interface EmployeeLoginCredentialsDao {
 
-	public int addEmployeeCredentials(String username,String password) throws BusinessException;
-	
-	
+	public String addEmployeeCredentials(String username, String password) throws BusinessException;
+
 }
