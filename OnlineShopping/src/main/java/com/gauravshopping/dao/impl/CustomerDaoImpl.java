@@ -18,13 +18,14 @@ public class CustomerDaoImpl implements CustomerDao {
 	public int createCustomer(Customer c) throws BusinessException {
 		int c1=0;
 		try(Connection con=MySqlConnection.getConnection()){
-			String sql="insert into customer(customer_id,firstname,lastname,email,password)values(?,?,?,?,?)";
+			String sql="insert into customer(customer_id,firstname,lastname,email,password,product_id)values(?,?,?,?,?,?)";
 			PreparedStatement ps=con.prepareStatement(sql);
 			ps.setInt(1,c.getCustomer_id());
 			ps.setString(2,c.getFirst_name());
 			ps.setString(3,c.getLast_name());
 			ps.setString(4,c.getEmail());
 			ps.setString(5,c.getPassword());
+			ps.setInt(6, c.getProduct().getProduct_id());
 			c1=ps.executeUpdate();
 			log.info("\n successfully inserted  in the database " + c1);
 		

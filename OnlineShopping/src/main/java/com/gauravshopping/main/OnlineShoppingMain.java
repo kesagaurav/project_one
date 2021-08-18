@@ -1,9 +1,12 @@
 package com.gauravshopping.main;
 
+import java.util.List;
 import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
+import com.gauravshopping.dao.ProductDao;
+import com.gauravshopping.dao.impl.ProductDaoImpl;
 import com.gauravshopping.exception.BusinessException;
 import com.gauravshopping.model.Customer;
 import com.gauravshopping.model.Employee;
@@ -26,7 +29,10 @@ public class OnlineShoppingMain {
 		log.info("========================================================");
 		Scanner sc = new Scanner(System.in);
 		int ch = 0;
-		ProductDaoService pDaoService=new ProductServiceImpl();
+		ProductDaoService pDaoService = new ProductServiceImpl();
+		ProductDao pDao = new ProductDaoImpl();
+//		CustomerProductService cpService=new CustomerProductServiceImpl();
+		CustomerService customerService=new CustomerServiceImpl();
 
 		do {
 			log.info("1) employee login");
@@ -61,8 +67,8 @@ public class OnlineShoppingMain {
 					option1 = Integer.parseInt(sc.nextLine());
 					switch (option1) {
 					case 1:
-					
-						Product product=new Product();
+
+						Product product = new Product();
 						log.info("here are the details for adding the product");
 						log.info("please enter product id");
 						product.setProduct_id(Integer.parseInt(sc.nextLine()));
@@ -71,7 +77,7 @@ public class OnlineShoppingMain {
 						log.info("enter price");
 						product.setPrice(Float.parseFloat(sc.nextLine()));
 						try {
-							if(pDaoService.CreateProduct(product)==1) {
+							if (pDaoService.CreateProduct(product) == 1) {
 								log.info("successfully inserted the product");
 								log.info(product);
 							}
@@ -82,9 +88,9 @@ public class OnlineShoppingMain {
 					case 2:
 						log.info("here are the details for updating price for particualr product name");
 						log.info("enter the product id");
-						int id=Integer.parseInt(sc.nextLine());
+						int id = Integer.parseInt(sc.nextLine());
 						log.info("please enter price");
-						float price=Float.parseFloat(sc.nextLine());
+						float price = Float.parseFloat(sc.nextLine());
 						try {
 							pDaoService.updateProduct(id, price);
 						} catch (BusinessException e) {
@@ -120,40 +126,55 @@ public class OnlineShoppingMain {
 				int option = 0;
 				do {
 					log.info("here is the product serach based upon there fields");
-					log.info("1)product id");
-					log.info("2)product_name");
-					log.info("3)price");
-					log.info("4)view cart");
-					log.info("5)exit from the product");
+					log.info("1)product_name");
+					log.info("2) shows the customers with product price");
+					log.info("3)view cart");
+					log.info("4)exit from the product");
 					option = Integer.parseInt(sc.nextLine());
 					switch (option) {
 					case 1:
-						log.info("\n adding some product please wait");
+						log.info("\n please enter the following details");
+						log.info("please enter product name");
+						String name = sc.nextLine();
+						try {
+							List<Product> productList = pDaoService.getProductByProductName(name);
+							if (productList != null && productList.size() > 0) {
+								log.info("Total there are " + productList.size() + " numper of products name is "
+										+ name.toUpperCase() + "pinting products names");
+								for (Product p1 : productList) {
+									log.info(p1);
+								}
+							}
+						} catch (BusinessException e1) {
+							log.warn(e1.getMessage());
+						}
 						break;
 					case 2:
-						log.info("\n adding some product please wait");
+						log.info("\n you can view the products");
+						try {
+							log.info(pDao.getAllProducts());
+						} catch (BusinessException e) {
+							log.info(e.getMessage());
+						}
+
 						break;
 					case 3:
 						log.info("\n adding some product please wait");
 						break;
 					case 4:
-						log.info("\n adding some product please wait");
-						break;
-					case 5:
-						log.info("\n thanks for using our app");
+						log.info("\n thankyou for using our online app bye ....... :)");
 						break;
 
 					default:
-						log.info("please enter choice between (1-5) only ");
+						log.info("please enter choice between (1-4) only ");
 						break;
 					}
 
-				} while (option != 5);
+				} while (option != 4);
 
 				break;
 			case 3:
 				log.info("\n please register an customer with below details");
-				CustomerService customerService = new CustomerServiceImpl();
 				Customer customer = new Customer();
 				try {
 
@@ -171,6 +192,38 @@ public class OnlineShoppingMain {
 				customer.setEmail(sc.nextLine());
 				log.info("\n please enter password");
 				customer.setPassword(sc.nextLine());
+				log.info("please serach for  your products ");
+				try {
+					List<Product> productList = pDao.getAllProducts();
+					for (int i = 0; i < productList.size(); i++) {
+						log.info((i + 1) + ")" + productList.get(i).getProduct_name());
+					}
+					log.info(productList.size() + 1 + ")Not preffered for now");
+
+					try {
+						System.out.println("Please enter your product choice between 1 - " + (productList.size() + 1));
+						int choice = Integer.parseInt(sc.nextLine());
+
+						if (choice > 0 && choice <= productList.size() + 1) {
+							if (choice == productList.size() + 1) {
+								customer.setProduct(new Product());
+							} else {
+								customer.setProduct(productList.get(choice - 1));
+
+							}
+						} else {
+							log.info("Invalid choice");
+						}
+
+					} catch (NumberFormatException e) {
+						log.warn("Product  choice should be number only");
+						break;
+					}
+				} catch (BusinessException e) {
+					log.warn(e.getMessage());
+					break;
+				}
+
 				try {
 					if (customerService.createCustomer(customer) == 1) {
 						log.info("\n customer is registered successfully");
@@ -185,7 +238,7 @@ public class OnlineShoppingMain {
 						"\n bye customers thanks for visting our app please visit again and give us feedback so that we can improve");
 				break;
 			default:
-				log.info("\n plz enter choice between 1 to 4 only");
+				log.info("\n you should  enter  your choice between 1 to 4 only");
 				break;
 			}
 		} while (ch != 4);

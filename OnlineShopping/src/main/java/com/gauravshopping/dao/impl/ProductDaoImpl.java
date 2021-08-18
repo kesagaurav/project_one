@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -42,20 +44,69 @@ public class ProductDaoImpl implements ProductDao {
 	public int updateProduct(int id, float price) throws BusinessException {
 		int c = 0;
 		try (Connection con = MySqlConnection.getConnection()) {
-			String sql = "update from product set price=? where id=?";
+			String sql = "update  product set price=? where product_id=?";
 			PreparedStatement preparedStatement = con.prepareStatement(sql);
-			preparedStatement.setInt(1, id);
-			preparedStatement.setFloat(2, price);
+			preparedStatement.setFloat(1, price);
+			preparedStatement.setInt(2, id);
 
 			c = preparedStatement.executeUpdate();
-			log.info("succesfully updated" + c);
+			log.info("succesfully updated " + c);
 
 		} catch (ClassNotFoundException | SQLException e) {
-			log.warn("deos not inserted succesfully please contact to system admin");
+			log.warn("deos not updated succesfully please contact to system admin");
 		}
 
 		return c;
 
 	}
 
+	@Override
+	public List<Product> getAllProducts() throws BusinessException {
+		List<Product> productList = new ArrayList<>();
+		try (Connection con = MySqlConnection.getConnection()) {
+			String sql = "select product_id,product_name,price from product";
+			PreparedStatement preparedStatement = con.prepareStatement(sql);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Product product = new Product();
+				product.setProduct_id(resultSet.getInt("product_id"));
+				product.setProduct_name(resultSet.getString("product_name"));
+				product.setPrice(resultSet.getFloat("price"));
+				productList.add(product);
+			}
+			if (productList.size() == 0) {
+				log.warn("no products registered so far please add an anthor product");
+			}
+
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return productList;
+
+	}
+
+	@Override
+	public List<Product> getProductByProductName(String product_name) throws BusinessException {
+		List<Product> productList = new ArrayList<>();
+		try (Connection con = MySqlConnection.getConnection()) {
+			String sql = "select product_id, product_name,price from product where product_name=?";
+			PreparedStatement preparedStatement = con.prepareStatement(sql);
+			preparedStatement.setString(1, product_name);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Product product = new Product();
+				product.setProduct_id(resultSet.getInt("product_id"));
+				product.setProduct_name(resultSet.getString("product_name"));
+				product.setPrice(resultSet.getFloat("price"));
+				productList.add(product);
+
+			}
+			if(productList.size()==0)
+				log.warn(" no product name " + product_name);
+		} catch (ClassNotFoundException | SQLException e) {
+		log.warn(e.getMessage());
+		}
+		return productList;
+	}
 }
