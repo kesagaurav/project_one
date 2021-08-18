@@ -5,17 +5,17 @@ import java.util.Scanner;
 import org.apache.log4j.Logger;
 
 import com.gauravshopping.exception.BusinessException;
-import com.gauravshopping.login.service.LoginCustomerService;
-import com.gauravshopping.login.service.LoginEmployeeService;
-import com.gauravshopping.login.service.impl.EmployeeLoginServiceImpl;
-import com.gauravshopping.login.service.impl.LoginCustomerServiceImpl;
 import com.gauravshopping.model.Customer;
 import com.gauravshopping.model.Employee;
 import com.gauravshopping.model.Product;
-import com.gauravshopping.product.service.ProductDaoService;
-import com.gauravshopping.product.service.impl.ProductServiceImpl;
 import com.gauravshopping.service.CustomerService;
+import com.gauravshopping.service.LoginCustomerService;
+import com.gauravshopping.service.LoginEmployeeService;
+import com.gauravshopping.service.ProductDaoService;
 import com.gauravshopping.service.impl.CustomerServiceImpl;
+import com.gauravshopping.service.impl.EmployeeLoginServiceImpl;
+import com.gauravshopping.service.impl.LoginCustomerServiceImpl;
+import com.gauravshopping.service.impl.ProductServiceImpl;
 
 public class OnlineShoppingMain {
 	private static Logger log = Logger.getLogger(OnlineShoppingMain.class);

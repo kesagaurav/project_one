@@ -16,7 +16,8 @@ import com.gauravshopping.util.MySqlConnection;
 //import jdk.internal.org.jline.utils.Log;
 
 public class ProductDaoImpl implements ProductDao {
-	private static Logger log=Logger.getLogger(ProductDaoImpl.class);
+	private static Logger log = Logger.getLogger(ProductDaoImpl.class);
+
 	@Override
 	public int CreateProduct(Product p) throws BusinessException {
 
@@ -27,7 +28,7 @@ public class ProductDaoImpl implements ProductDao {
 			preparedStatement.setInt(1, p.getProduct_id());
 			preparedStatement.setString(2, p.getProduct_name());
 			preparedStatement.setFloat(3, p.getPrice());
-			c=preparedStatement.executeUpdate();
+			c = preparedStatement.executeUpdate();
 			log.info("succesfully inserted " + c);
 
 		} catch (ClassNotFoundException | SQLException e) {
@@ -43,10 +44,10 @@ public class ProductDaoImpl implements ProductDao {
 		try (Connection con = MySqlConnection.getConnection()) {
 			String sql = "update from product set price=? where id=?";
 			PreparedStatement preparedStatement = con.prepareStatement(sql);
-			preparedStatement.setInt(1,id);
-			preparedStatement.setFloat(2,price);
-		
-			c=preparedStatement.executeUpdate();
+			preparedStatement.setInt(1, id);
+			preparedStatement.setFloat(2, price);
+
+			c = preparedStatement.executeUpdate();
 			log.info("succesfully updated" + c);
 
 		} catch (ClassNotFoundException | SQLException e) {
@@ -55,8 +56,6 @@ public class ProductDaoImpl implements ProductDao {
 
 		return c;
 
-		
-		
 	}
 
 }
