@@ -14,19 +14,23 @@ import com.gauravshopping.util.MySqlConnection;
 
 public class CustomerLoginCredentialsDaoImpl implements CustomerLoginCredentialsDao {
 	private static Logger log=Logger.getLogger(CustomerLoginCredentialsDaoImpl.class);
+	public static int ad;
 	@Override
 	public String addCredentials(String email, String password) throws BusinessException {
-		//int b=0;
+		
+		boolean result = false;
 		try(Connection connection=MySqlConnection.getConnection()){
-			String sql="select email,password from customer where email=? and password=?";
+			String sql="select customer_id,email,password from customer where email=? and password=?";
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			preparedStatement.setString(1,email);
 			preparedStatement.setString(2, password);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			while(resultSet.next()) {
-				Customer c=new Customer();
-				c.setEmail(resultSet.getString("email"));
-				c.setPassword(resultSet.getString("password"));
+//				Customer customer=new Customer();
+//				customer.setEmail(resultSet.getString("email"));
+//				customer.setPassword(resultSet.getString("password"));
+				ad=resultSet.getInt(1);
+				result=true;
 			
 			}
 		
@@ -35,8 +39,7 @@ public class CustomerLoginCredentialsDaoImpl implements CustomerLoginCredentials
 		} catch (ClassNotFoundException | SQLException e) {
 				log.warn(e.getMessage());
 		}
-		//return 1;
-		//return email + password;
+	
 		return "";
 		
 	}

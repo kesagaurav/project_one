@@ -7,30 +7,24 @@ public class Customer {
 	private String last_name;
 	private String email;
 	private String password;
-	private Product product;
+
 
 	public Customer() {
 		super();
 	}
 
-	public Customer(int customer_id, String first_name, String last_name, String email, String password,
-			Product product) {
+	public Customer(int customer_id, String first_name, String last_name, String email, String password
+			) {
 		super();
 		this.customer_id = customer_id;
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.email = email;
 		this.password = password;
-		this.product = product;
+		
 	}
 
-	public Product getProduct() {
-		return product;
-	}
 
-	public void setProduct(Product product) {
-		this.product = product;
-	}
 
 	public String getPassword() {
 		return password;
@@ -75,7 +69,7 @@ public class Customer {
 	@Override
 	public String toString() {
 		return "Customer [customer_id=" + customer_id + ", first_name=" + first_name + ", last_name=" + last_name
-				+ ", email=" + email + ", password=" + password + ", product=" + product + "]";
+				+ ", email=" + email + ", password=" + password + "]";
 	}
 
 	

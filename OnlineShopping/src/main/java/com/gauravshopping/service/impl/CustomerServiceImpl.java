@@ -1,5 +1,7 @@
 package com.gauravshopping.service.impl;
 
+import java.util.List;
+
 import com.gauravshopping.dao.CustomerDao;
 import com.gauravshopping.dao.impl.CustomerDaoImpl;
 import com.gauravshopping.exception.BusinessException;
@@ -30,6 +32,12 @@ public class CustomerServiceImpl implements CustomerService {
 			throw new BusinessException("invalid password  because it should be min of 3 characters and min of 1 number" + c.getPassword() + "please enter valid password");
 		}
 		return customerDao.createCustomer(c);
+	}
+
+	@Override
+	public List<Customer> getAllCustomers() throws BusinessException {
+		
+		return customerDao.getAllCustomers();
 	}
 
 }

@@ -79,7 +79,6 @@ public class ProductDaoImpl implements ProductDao {
 			}
 
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return productList;
