@@ -9,7 +9,7 @@ import com.gauravshopping.service.LoginEmployeeService;
 public class EmployeeLoginServiceImpl implements LoginEmployeeService {
 	EmployeeLoginCredentialsDao ecDao=new EmployeeCredentialsDaoImpl();
 	@Override
-	public String addEmployeeCredentials(String username, String password) throws BusinessException {
+	public boolean addEmployeeCredentials(String username, String password) throws BusinessException {
 		if(!EmployeeLoginCredentials.isValidUsernameAndPassword(username, password)) {
 			throw new BusinessException("\n invalid username and password");
 		}

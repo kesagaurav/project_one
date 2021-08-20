@@ -15,7 +15,7 @@ public class CustomerLoginCredentialsDaoImpl implements CustomerLoginCredentials
 	private static Logger log=Logger.getLogger(CustomerLoginCredentialsDaoImpl.class);
 	public static int ad;
 	@Override
-	public String addCredentials(String email, String password) throws BusinessException {
+	public boolean addCredentials(String email, String password) throws BusinessException {
 		boolean   result = false;
 	
 		try(Connection connection=MySqlConnection.getConnection()){
@@ -40,7 +40,7 @@ public class CustomerLoginCredentialsDaoImpl implements CustomerLoginCredentials
 				log.warn(e.getMessage());
 		}
 	
-		return "";
+		return result;
 		
 	}
 

@@ -1,8 +1,6 @@
 package com.gauravshopping.main;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 import org.apache.log4j.Logger;
 

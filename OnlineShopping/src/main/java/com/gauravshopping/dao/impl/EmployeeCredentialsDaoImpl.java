@@ -16,7 +16,7 @@ public class EmployeeCredentialsDaoImpl implements EmployeeLoginCredentialsDao {
 	private static Logger log=Logger.getLogger(EmployeeCredentialsDaoImpl.class);
 
 	@Override
-	public String addEmployeeCredentials(String username, String password) throws BusinessException {
+	public boolean addEmployeeCredentials(String username, String password) throws BusinessException {
 		
 		try(Connection connection=MySqlConnection.getConnection()){
 			String sql="select employee_name,employee_password from employee where employee_name=? and employee_password=?";
@@ -34,7 +34,8 @@ public class EmployeeCredentialsDaoImpl implements EmployeeLoginCredentialsDao {
 		} catch (ClassNotFoundException | SQLException e) {
 			log.info(e.getMessage());
 		}
-		return "";
+		return true;
+	
 		
 		
 

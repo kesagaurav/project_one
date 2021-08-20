@@ -10,7 +10,7 @@ public class LoginCustomerServiceImpl implements LoginCustomerService {
 	CustomerLoginCredentialsDao customerLoginCredentials  = new CustomerLoginCredentialsDaoImpl();
 	
 	@Override
-	public String addCredentials(String email, String password) throws BusinessException {
+	public boolean addCredentials(String email, String password) throws BusinessException {
 		if(!CustomerLoginCredentials.isValidUsernameAndPassword(email, password)) {
 			throw new BusinessException("\n invalid username and password ");
 		}
