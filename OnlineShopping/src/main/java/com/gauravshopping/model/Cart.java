@@ -4,16 +4,16 @@ public class Cart {
 
 	private int cart_id;
 	private Product product;
-	private Customer customer;
+	private int customerid;
 	public Cart() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Cart(int cart_id, Product product, Customer customer) {
+	public Cart(int cart_id, Product product, int customerid) {
 		super();
 		this.cart_id = cart_id;
 		this.product = product;
-		this.customer = customer;
+		this.customerid = customerid;
 	}
 	public int getCart_id() {
 		return cart_id;
@@ -27,15 +27,16 @@ public class Cart {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	public Customer getCustomer() {
-		return customer;
+	
+	public int getCustomerid() {
+		return customerid;
 	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setCustomerid(int customerid) {
+		this.customerid = customerid;
 	}
 	@Override
 	public String toString() {
-		return "Cart [cart_id=" + cart_id + ", product=" + product + ",customer = " + customer + "]";
+		return "Cart [cart_id=" + cart_id + ", product=" + product + ", customerid=" + customerid + "]";
 	}
 	
 	

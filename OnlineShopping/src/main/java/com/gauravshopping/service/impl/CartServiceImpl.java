@@ -18,9 +18,9 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public List<Cart> getAllCartDetails(int product_id) throws BusinessException {
+	public List<Cart> getAllCartDetails(Cart cart) throws BusinessException {
 		// TODO Auto-generated method stub
-		return cartDao.getAllCartDetails(product_id);
+		return cartDao.getAllCartDetails(cart);
 	}
 
 }

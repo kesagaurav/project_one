@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,23 +34,24 @@ public class CartDaoImpl implements CartDao {
 
 }
 	@Override
-	public List<Cart> getAllCartDetails(int product_id) throws BusinessException {
+	public List<Cart> getAllCartDetails(Cart cart) throws BusinessException {
 		List<Cart> cartList=new ArrayList<>();
 		try(Connection connection=MySqlConnection.getConnection()){
-			String sql="select p.product_id,product_name,price from product p join cart c on c.product_id=p.product_id where c.product_id=?";
+			String sql="select cart_id,customer_id,c.product_id product_id,product_name,price from cart c join product p on c.product_id=p.product_id where c.customer_id=?";
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
-			preparedStatement.setInt(1, product_id);
+			preparedStatement.setInt(1, CustomerLoginCredentialsDaoImpl.ad);
 			ResultSet resultSet=preparedStatement.executeQuery();
 			while(resultSet.next()) {
 				Product product=new Product();
 				product.setProduct_id(resultSet.getInt("product_id"));
 				product.setProduct_name(resultSet.getString("product_name"));
 				product.setPrice(resultSet.getFloat("price"));
-				Cart cart=new Cart();
-				cart.setCart_id(resultSet.getInt("cart_id"));
-				cart.getProduct().setProduct_id(resultSet.getInt("product_id"));
-				cart.getCustomer().setCustomer_id(resultSet.getInt("customer_id"));
-				cart.setProduct(product);
+				Cart cart1=new Cart();
+				
+				cart1.setCart_id(resultSet.getInt("cart_id"));
+				cart1.setCustomerid(resultSet.getInt("customer_id"));
+				cart1.setProduct(product);
+				cartList.add(cart1);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();

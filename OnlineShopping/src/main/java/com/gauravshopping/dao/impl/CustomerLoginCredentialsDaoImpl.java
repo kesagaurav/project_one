@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
 
 import com.gauravshopping.dao.CustomerLoginCredentialsDao;
 import com.gauravshopping.exception.BusinessException;
-import com.gauravshopping.model.Customer;
 import com.gauravshopping.util.MySqlConnection;
 
 public class CustomerLoginCredentialsDaoImpl implements CustomerLoginCredentialsDao {
@@ -17,14 +16,15 @@ public class CustomerLoginCredentialsDaoImpl implements CustomerLoginCredentials
 	public static int ad;
 	@Override
 	public String addCredentials(String email, String password) throws BusinessException {
-		
-		boolean result = false;
+		boolean   result = false;
+	
 		try(Connection connection=MySqlConnection.getConnection()){
 			String sql="select customer_id,email,password from customer where email=? and password=?";
 			PreparedStatement preparedStatement=connection.prepareStatement(sql);
 			preparedStatement.setString(1,email);
 			preparedStatement.setString(2, password);
 			ResultSet resultSet=preparedStatement.executeQuery();
+		
 			while(resultSet.next()) {
 //				Customer customer=new Customer();
 //				customer.setEmail(resultSet.getString("email"));
