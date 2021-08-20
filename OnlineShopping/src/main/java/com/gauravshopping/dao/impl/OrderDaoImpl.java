@@ -23,7 +23,7 @@ public class OrderDaoImpl implements OrderDao {
 			preparedStatement.executeUpdate();
 			String sql2="delete from cart where customer_id=?";
 			PreparedStatement preparedStatement1=connection.prepareStatement(sql2);
-			preparedStatement.setInt(1, cart.getCustomerid());
+			preparedStatement1.setInt(1, cart.getCustomerid());
 			d=preparedStatement.executeUpdate();
 		} catch (ClassNotFoundException | SQLException e) {
 			log.warn(e.getMessage());

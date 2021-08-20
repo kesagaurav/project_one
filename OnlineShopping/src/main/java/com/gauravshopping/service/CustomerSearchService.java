@@ -11,5 +11,5 @@ public interface CustomerSearchService {
 	public List<Customer> getStringByFirstName(String firstname) throws BusinessException;
 	public List<Customer> getStringByLastName(String lastname) throws BusinessException;
 	public List<Customer> getStringByEmail(String email) throws BusinessException;
-	public List<Customer> getStringByPassword(String password) throws BusinessException;
+
 }

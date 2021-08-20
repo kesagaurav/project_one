@@ -28,7 +28,6 @@ import com.gauravshopping.service.impl.CustomerServiceImpl;
 import com.gauravshopping.service.impl.EmployeeLoginServiceImpl;
 import com.gauravshopping.service.impl.LoginCustomerServiceImpl;
 import com.gauravshopping.service.impl.MarkStatusSearchImpl;
-import com.gauravshopping.service.impl.OrderSearchServiceImpl;
 import com.gauravshopping.service.impl.OrderServiceImpl;
 import com.gauravshopping.service.impl.ProductServiceImpl;
 import com.gauravshopping.service.impl.ViewOrderServiceImpl;
@@ -50,7 +49,7 @@ public class OnlineShoppingMain {
 		OrderService orderService = new OrderServiceImpl();
 		ViewOrderService viewOrderService = new ViewOrderServiceImpl();
 		MarkStatusService markStatusService=new MarkStatusSearchImpl();
-		OrderSearchService 	orderSearchService=new OrderSearchServiceImpl();
+		
 
 		do {
 			log.info("1) employee login");
@@ -284,8 +283,7 @@ public class OnlineShoppingMain {
 							log.info("2)search based on firstname");
 							log.info("3)search based upon the lastname");
 							log.info("4)search based upon the email");
-							log.info("5)search based on the order id");
-							log.info("6)exit");
+							log.info("5)exit");
 							try {
 								option11 = Integer.parseInt(scan.nextLine());
 							} catch (NumberFormatException e) {
@@ -347,24 +345,13 @@ public class OnlineShoppingMain {
 								}
 								break;
 							case 5:
-								log.info("enter order details");
-							int order_id=Integer.parseInt(scan.nextLine());
-								try {
-									Order order1=orderSearchService.getOrderById(order_id);
-									if(order1!=null) {
-										log.info("order1 is found with " + order1);
-										log.info(order1);
-									}
-								} catch (BusinessException e) {
-									log.warn(e.getMessage());
-								}
-							
+								log.info("bye and thank you visit again :)");
 								break;
 							default:
-								log.info("please enter your choice between (1-6) only");
+								log.info("please enter your choice between (1-5) only");
 								break;
 							}
-						} while (option11 != 6);
+						} while (option11 != 5);
 						break;
 					case 8:
 						log.info("\n please enter an order id");

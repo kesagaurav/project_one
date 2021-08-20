@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.gauravshopping.exception.BusinessException;
 import com.gauravshopping.model.Customer;
+import com.gauravshopping.model.Order;
 
 public interface CustomerSearchDao {
 
@@ -11,7 +12,7 @@ public interface CustomerSearchDao {
 	public List<Customer> getStringByFirstName(String firstname) throws BusinessException;
 	public List<Customer> getStringByLastName(String lastname) throws BusinessException;
 	public List<Customer> getStringByEmail(String email) throws BusinessException;
-	public List<Customer> getStringByPassword(String password) throws BusinessException;
+
 	
 	
 	
