@@ -10,6 +10,7 @@ public interface ProductDaoService {
 	public int updateProduct(int id,float price) throws BusinessException;
 	public List<Product> getAllProducts() throws BusinessException;
 	public List<Product> getProductByProductName(String product_name) throws BusinessException;
+	public int deleteproduct(int product_id) throws BusinessException;
 
 
 }

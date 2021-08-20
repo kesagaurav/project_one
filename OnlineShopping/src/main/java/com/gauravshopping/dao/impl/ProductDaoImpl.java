@@ -24,9 +24,9 @@ public class ProductDaoImpl implements ProductDao {
 	public int CreateProduct(Product p) throws BusinessException {
 
 		int c = 0;
-		try (Connection con = MySqlConnection.getConnection()) {
+		try (Connection connection = MySqlConnection.getConnection()) {
 			String sql = "insert into product(product_id,product_name,price) values(?,?,?)";
-			PreparedStatement preparedStatement = con.prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, p.getProduct_id());
 			preparedStatement.setString(2, p.getProduct_name());
 			preparedStatement.setFloat(3, p.getPrice());
@@ -43,9 +43,9 @@ public class ProductDaoImpl implements ProductDao {
 	@Override
 	public int updateProduct(int id, float price) throws BusinessException {
 		int c = 0;
-		try (Connection con = MySqlConnection.getConnection()) {
+		try (Connection connection = MySqlConnection.getConnection()) {
 			String sql = "update  product set price=? where product_id=?";
-			PreparedStatement preparedStatement = con.prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setFloat(1, price);
 			preparedStatement.setInt(2, id);
 
@@ -63,9 +63,9 @@ public class ProductDaoImpl implements ProductDao {
 	@Override
 	public List<Product> getAllProducts() throws BusinessException {
 		List<Product> productList = new ArrayList<>();
-		try (Connection con = MySqlConnection.getConnection()) {
+		try (Connection connection = MySqlConnection.getConnection()) {
 			String sql = "select product_id,product_name,price from product";
-			PreparedStatement preparedStatement = con.prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Product product = new Product();
@@ -88,9 +88,9 @@ public class ProductDaoImpl implements ProductDao {
 	@Override
 	public List<Product> getProductByProductName(String product_name) throws BusinessException {
 		List<Product> productList = new ArrayList<>();
-		try (Connection con = MySqlConnection.getConnection()) {
+		try (Connection connection = MySqlConnection.getConnection()) {
 			String sql = "select product_id, product_name,price from product where product_name=?";
-			PreparedStatement preparedStatement = con.prepareStatement(sql);
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, product_name);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
@@ -107,5 +107,19 @@ public class ProductDaoImpl implements ProductDao {
 		log.warn(e.getMessage());
 		}
 		return productList;
+	}
+
+	@Override
+	public int deleteproduct(int product_id) throws BusinessException {
+		int d=0;
+		try (Connection connection = MySqlConnection.getConnection()) {
+			String sql="delete from product where product_id=?";
+			PreparedStatement preparedStatement=connection.prepareStatement(sql);
+			preparedStatement.setInt(1, product_id);
+			d=preparedStatement.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+			log.info(e.getMessage());
+		}
+		return d;
 	}
 }

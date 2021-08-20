@@ -40,4 +40,10 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerDao.getAllCustomers();
 	}
 
+	@Override
+	public int deleteCustomer(int customer_id) throws BusinessException {
+		// TODO Auto-generated method stub
+		return customerDao.deleteCustomer(customer_id);
+	}
+
 }

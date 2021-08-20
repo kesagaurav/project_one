@@ -67,9 +67,11 @@ class TestCustomerService {
 		String password="gat123771";
 		cu1=new Customer(customer_id,firstname,lastname,email,password);
 		int checkDetails=0;
+		int deleteDetails=0;
 		try {
 		
 		checkDetails=customerService.createCustomer(cu1);
+		deleteDetails=customerService.deleteCustomer(customer_id);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
@@ -89,6 +91,17 @@ class TestCustomerService {
 	
 	}
 	
+	
+	@Test
+	public void getAllCustomers() {
+		int noOfCustomers=29;
+		try {
+			assertEquals(noOfCustomers,customerService.getAllCustomers().size());
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	
 	
@@ -152,15 +165,35 @@ class TestCustomerService {
 	
 	@Test
 	public void testCreateProducts() {
-		int product_id=108;
+		int product_id=120;
 		String product_name="laptop";
 		float price=300;
+		product1=new Product(product_id,product_name,price);
+		int checkProduct=0;
+		int deleteProduct=0;
 		try {
-			product1=new Product(product_id,product_name,price);
-			assertEquals(1,productDaoService.CreateProduct(product1));
+			checkProduct=productDaoService.CreateProduct(product1);
+			deleteProduct=productDaoService.deleteproduct(product_id);
+			
 		} catch (BusinessException e) {
 		}
+		assertEquals(1,checkProduct);
 	}
+	
+
+	
+	@Test
+	public void testGetAllProducts() {
+		int noOfProducts=27;
+		try {
+			assertEquals(noOfProducts,productDaoService.getAllProducts().size());
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
+	
 	
 	
 	

@@ -32,4 +32,10 @@ public class ProductServiceImpl implements ProductDaoService {
 		return pDao.getProductByProductName(product_name);
 	}
 
+	@Override
+	public int deleteproduct(int product_id) throws BusinessException {
+		
+		return pDao.deleteproduct(product_id);
+	}
+
 }

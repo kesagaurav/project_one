@@ -60,5 +60,18 @@ public class CustomerDaoImpl implements CustomerDao {
 		}
 		return customerList;
 	}
+	@Override
+	public int deleteCustomer(int customer_id) throws BusinessException {
+	int d=0;
+	try(Connection connection=MySqlConnection.getConnection()){
+		String sql="delete from customer where customer_id=?";
+		PreparedStatement preparedStatement=connection.prepareStatement(sql);
+		preparedStatement.setInt(1, customer_id);
+		d=preparedStatement.executeUpdate();
+	} catch (ClassNotFoundException | SQLException e) {
+		throw new BusinessException("please contact to system admin");
+	}
+		return d;
+	}
 
 }

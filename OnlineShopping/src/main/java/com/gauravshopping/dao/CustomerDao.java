@@ -9,5 +9,6 @@ public interface CustomerDao {
 
 		public int createCustomer(Customer customer) throws BusinessException;
 		public  List<Customer> getAllCustomers() throws BusinessException;
+		public int deleteCustomer(int customer_id) throws BusinessException;
 	
 }
