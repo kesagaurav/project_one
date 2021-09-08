@@ -17,7 +17,7 @@
 # getting into the part of the project first we have should install sts(spring tool suite) to download the ide for java and sql
 # and its link is sts link is : https://download.springsource.com/release/STS4/4.6.2.RELEASE/dist/e4.15/spring-tool-suite-4-4.6.2.RELEASE-e4.15.0-win32.win32.x86_64.self-extracting.jar
 # and also for the database you have should install mysql workbench 
-
+#
 
 
 
