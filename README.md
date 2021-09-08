@@ -7,7 +7,7 @@
 * Sql
 * Jdbc
 # Features
-_ I implement the customer register and also the employee login 
+_ I implement the customer register and also the employee login _
 _ and also the customer login 
 _ so when we logged in the customer we will show you the options of 
 _ seraching the products based on customer search , showing list of orders ,place an order,add product item to the cart
