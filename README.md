@@ -3,9 +3,9 @@
 # Project Description
 # my project is about the online shopping app where customers can login and customer can buy the items as well
 # Technologies Used
- Java
- Sql
- Jdbc
+3# Java
+## Sql
+## Jdbc
 # Features
 # I implement the customer register and also the employee login 
 # and also the customer login 
