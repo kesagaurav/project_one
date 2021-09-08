@@ -6,12 +6,14 @@
 * Java
 * Sql
 * Jdbc
+* Junit 
 # Features
-1.I implement the customer register and also the employee login 
-2. And also the customer login 
-3.So when we logged in the customer we will show you the options of 
-4.Seraching the products based on customer search , showing list of orders ,place an order,add product item to the cart
-5.List of carts and list of customers buying with the items with status success or not
+#1.I implement the customer register and also the employee login 
+#2. And also the customer login 
+#3.So when we logged in the customer we will show you the options of 
+#4.Seraching the products based on customer search , showing list of orders ,place an order,add product item to the cart
+#5.List of carts and list of customers buying with the items with status success or not
+#6.We have tested our projects using junit
 # Getting Started
 * Most of our code we will be using the tool which is called springtoolsuite (short form sts)
 * getting into the part of the project first we have should install sts(spring tool suite) to download the ide for java
