@@ -7,6 +7,8 @@
 * Sql
 * Jdbc
 * Junit 
+* Maven
+* Log4j
 # Features
 1. The customer can register and also the employee login 
 2. And also the customer can login 
